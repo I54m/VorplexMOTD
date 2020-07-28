@@ -1,5 +1,5 @@
-# VectorMOTD
-MOTD plugin for Vector Network
+# VorplexMOTD
+MOTD plugin for Vorplex
 
 This plugin I took upon myself after we had a lot of issues with our current serverlist plugin not showing the desired text.
 This plugin included a countdown feature feature and a normal motd so that we could have countdowns till releases if we wanted.
