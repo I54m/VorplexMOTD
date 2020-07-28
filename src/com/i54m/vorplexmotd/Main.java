@@ -9,10 +9,11 @@ import net.luckperms.api.query.QueryOptions;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.Favicon;
 import net.md_5.bungee.api.ServerPing;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.PendingConnection;
-import net.md_5.bungee.api.event.PreLoginEvent;
+import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -112,7 +113,7 @@ public class Main extends Plugin implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onLogin(PreLoginEvent event) {
+    public void onLogin(LoginEvent event) {
         if (getTime(true) != null) {
             User user = luckPerms.getUserManager().getUser(event.getConnection().getUniqueId());
             if (user == null) {
@@ -149,8 +150,13 @@ public class Main extends Plugin implements Listener {
         ServerPing sp = event.getResponse();
         PendingConnection con = event.getConnection();
         if (!config.getString("maintenance-end").equals("null") && getTime(true) != null) {
-            String message = config.getString("maintenance.firstLine").replaceAll("%timeleft%", getTime(true)) + ChatColor.RESET + "\n" + config.getString("maintenance.secondLine").replaceAll("%timeleft%", getTime(true));
-            sp.setDescriptionComponent(new ComponentBuilder().appendLegacy(ChatColor.translateAlternateColorCodes('&', message)).getCurrentComponent());
+            String message = config.getString("maintenance.firstLine").replace("%timeleft%", getTime(true)) + "&r\n" + config.getString("maintenance.secondLine").replace("%timeleft%", getTime(true));
+            BaseComponent[] componentArray = TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message));
+            BaseComponent component = new TextComponent();
+            for (BaseComponent componentItems : componentArray) {
+                component.addExtra(componentItems);
+            }
+            sp.setDescriptionComponent(component);
 
             if (config.getBoolean("maintenance.variable-slots"))
                 sp.getPlayers().setMax(getProxy().getOnlineCount() + config.getInt("maintenance.slots"));
@@ -171,8 +177,14 @@ public class Main extends Plugin implements Listener {
         } else {
             if (getTime(true) == null)
                 maintenance = false;
-            String message = config.getString("firstLine").replaceAll("%timeleft%", getTime(false)) + ChatColor.RESET + "\n" + config.getString("secondLine").replaceAll("%timeleft%", getTime(false));
-            sp.setDescriptionComponent(new ComponentBuilder().appendLegacy(ChatColor.translateAlternateColorCodes('&', message)).getCurrentComponent());
+
+            String message = config.getString("firstLine").replace("%timeleft%", getTime(false)) + "&r\n" + config.getString("secondLine").replace("%timeleft%", getTime(false));
+            BaseComponent[] componentArray = TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message));
+            BaseComponent component = new TextComponent();
+            for (BaseComponent componentItems : componentArray) {
+                component.addExtra(componentItems);
+            }
+            sp.setDescriptionComponent(component);
 
             if (config.getBoolean("variable-slots"))
                 sp.getPlayers().setMax(getProxy().getOnlineCount() + config.getInt("slots"));
@@ -195,8 +207,9 @@ public class Main extends Plugin implements Listener {
     }
 
     public String getTime(boolean maintenance) {
-        String dateStop = maintenance ? config.getString("maintenance-end") : config.getString("date");
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+        String maintenanceDate = config.getString("maintenance-end").equals("null") ? format.format(new Date().getTime()) : config.getString("maintenance-end");
+        String dateStop = maintenance ? maintenanceDate : config.getString("date");
         Date date = null;
 
         try {
