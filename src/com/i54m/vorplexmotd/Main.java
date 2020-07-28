@@ -138,7 +138,7 @@ public class Main extends Plugin implements Listener {
             CachedPermissionData permissionData = user.getCachedData().getPermissionData(queryOptions);
             if (!permissionData.checkPermission("vorplexcore.maintenance.bypass").asBoolean()) {
                 event.setCancelled(true);
-                event.setCancelReason(TextComponent.fromLegacyText(config.getString("maintenance.kick-message").replaceAll("%timeleft%", getTime(true))));
+                event.setCancelReason(TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', config.getString("maintenance.kick-message").replaceAll("%timeleft%", getTime(true)))));
             }
         }
     }
@@ -150,7 +150,7 @@ public class Main extends Plugin implements Listener {
         PendingConnection con = event.getConnection();
         if (!config.getString("maintenance-end").equals("null") && getTime(true) != null) {
             String message = config.getString("maintenance.firstLine").replaceAll("%timeleft%", getTime(true)) + ChatColor.RESET + "\n" + config.getString("maintenance.secondLine").replaceAll("%timeleft%", getTime(true));
-            sp.setDescription(ChatColor.translateAlternateColorCodes('&', message));
+            sp.setDescriptionComponent(new ComponentBuilder().appendLegacy(ChatColor.translateAlternateColorCodes('&', message)).getCurrentComponent());
 
             if (config.getBoolean("maintenance.variable-slots"))
                 sp.getPlayers().setMax(getProxy().getOnlineCount() + config.getInt("maintenance.slots"));
@@ -172,7 +172,7 @@ public class Main extends Plugin implements Listener {
             if (getTime(true) == null)
                 maintenance = false;
             String message = config.getString("firstLine").replaceAll("%timeleft%", getTime(false)) + ChatColor.RESET + "\n" + config.getString("secondLine").replaceAll("%timeleft%", getTime(false));
-            sp.setDescription(ChatColor.translateAlternateColorCodes('&', message));
+            sp.setDescriptionComponent(new ComponentBuilder().appendLegacy(ChatColor.translateAlternateColorCodes('&', message)).getCurrentComponent());
 
             if (config.getBoolean("variable-slots"))
                 sp.getPlayers().setMax(getProxy().getOnlineCount() + config.getInt("slots"));
