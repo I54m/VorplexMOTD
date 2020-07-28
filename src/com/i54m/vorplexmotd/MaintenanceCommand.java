@@ -49,11 +49,13 @@ public class MaintenanceCommand extends Command {
                     calendar.setTimeInMillis(length);
                     plugin.config.set("maintenance-end", new SimpleDateFormat("MM/dd/yy HH:mm:ss").format(calendar.getTime()));
                     plugin.maintenance = true;
+                    plugin.saveConfig();
                     return;
                 }
                 case "stop": {
                     plugin.maintenance = false;
                     plugin.config.set("maintenance-end", "null");
+                    plugin.saveConfig();
                     return;
                 }
             }
