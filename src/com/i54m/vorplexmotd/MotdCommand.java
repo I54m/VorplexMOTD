@@ -1,4 +1,4 @@
-package me.fiftyfour.vectormotd;
+package com.i54m.vorplexmotd;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -7,10 +7,10 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class MotdCommand extends Command {
 
-    private Main plugin = Main.getInstance();
+    private final Main plugin = Main.getInstance();
 
     public MotdCommand() {
-        super("motdreload", "vectorcore.motd", "vectormotd", "sl", "serverlist");
+        super("motdreload", "vorplexcore.motd", "sl", "serverlist");
     }
 
     @Override

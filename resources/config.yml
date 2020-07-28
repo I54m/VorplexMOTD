@@ -1,0 +1,42 @@
+#use %timeleft% for the amount of time left till countdown
+firstLine: "&c&lsome stuff"
+secondLine: "&6Server releases in: %timeleft%"
+#set the maximum slots to show the server as having, this does not stop people from joining!
+slots: 1
+#if this is true it overrides the above setting and makes the max slots the online playercount + slots (eg: 10 players are online. slots = 10 + slots)
+variable-slots: true
+#sets the hover messages
+hovermessage: "Welcome to Vorplex!"
+#custom version name
+version: "Vorplex 1.8.x - 1.16.x"
+
+#date must be in this format "MM/dd/yy HH:mm:ss". The hour must be on a 24h clock. So if you wanted to do 5 PM,
+#you would put hour 17.
+date: '02/08/20 13:00:00'
+#Use this list: https://publib.boulder.ibm.com/tividd/td/TWS/SC32-1274-02/en_US/HTML/SRF_mst273.htm
+timezone: 'EST'
+
+time-value-end: "Server is released!"
+
+##############################################
+#         Maintenance Mode Variables         #
+##############################################
+
+#this is set when maintenance mode is started via the command /maintenance start <time>
+#this can also be set to start maintenance without having to start the server up
+maintenance-end: "null"
+
+maintenance:
+  #use %timeleft% for the amount of time left till countdown
+  firstLine: "&c&lServer is undergoing maintenance!"
+  secondLine: "        &c&lETA: %timeleft%"
+  #set the maximum slots to show the server as having, this does not stop people from joining!
+  slots: 0
+  #if this is true it overrides the above setting and makes the max slots the online playercount + slots (eg: 10 players are online. slots = 10 + slots)
+  variable-slots: false
+  #sets the hover messages
+  hovermessage: "&cServer is undergoing maitenance!"
+  #custom version name - this will always be displayed in maintenance mode
+  version: "Vorplex 1.8.x - 1.16.x"
+  #this is the kick message that will be sent to player's when they are unable to join because the server is in maintenance mode
+  kick-message: "&c&lServer is undergoing maintenance!\n        &c&lETA: %timeleft%"
