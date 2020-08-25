@@ -7,6 +7,11 @@
     <groupId>net.vorplex</groupId>
     <artifactId>VorplexMOTD</artifactId>
     <version>1.0</version>
+    <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format> dd-MM-yy HH:mm:ss</maven.build.timestamp.format>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <repositories>
 
