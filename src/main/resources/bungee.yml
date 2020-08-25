@@ -2,7 +2,7 @@ name: VorplexMOTD
 version: 1.0
 author: I54m
 website: https://i54m.com
-main: com.i54m.vorplexmotd.Main
+main: net.vorplex.motd.Main
 description: A motd plugin for Vorplex.
 softdepend:
   - LuckPerms

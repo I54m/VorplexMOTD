@@ -1,4 +1,4 @@
-package com.i54m.vorplexmotd;
+package net.vorplex.motd;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;

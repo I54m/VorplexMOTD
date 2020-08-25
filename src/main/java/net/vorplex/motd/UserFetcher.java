@@ -1,4 +1,4 @@
-package com.i54m.vorplexmotd;
+package net.vorplex.motd;
 
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.model.user.UserManager;
