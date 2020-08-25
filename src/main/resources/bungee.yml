@@ -1,5 +1,5 @@
 name: VorplexMOTD
-version: 1.0
+version: ${project.version}
 author: I54m
 website: https://i54m.com
 main: net.vorplex.motd.Main
