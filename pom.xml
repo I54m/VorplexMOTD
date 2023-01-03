@@ -15,11 +15,10 @@
 
     <repositories>
 
-    <repository>
-        <id>BungeeCord-repo</id>
-        <name>sonatype</name>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
+        <repository>
+            <id>bungeecord-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
 
     </repositories>
 
@@ -28,7 +27,8 @@
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
-            <version>1.16-R0.2-SNAPSHOT</version>
+            <version>1.16-R0.3</version>
+            <type>jar</type>
             <scope>provided</scope>
         </dependency>
 
